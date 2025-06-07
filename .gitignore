@@ -1,26 +1,10 @@
-# Environment variables
+node_modules/
+npm-debug.log*
 .env
-
-# Node dependencies
-/node_modules/
-
-# Logs
+.env.local
+.env.production.local
 logs
 *.log
-npm-debug.log*
-
-# OS-specific
 .DS_Store
-Thumbs.db
-
-# Editor-specific
 .vscode/
 .idea/
-*.swp
-
-# Build output (if applicable)
-dist/
-build/
-
-# Optional: if you use coverage tools like Jest
-coverage/

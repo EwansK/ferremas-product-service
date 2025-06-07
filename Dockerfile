@@ -1,23 +1,14 @@
-# Use official Node.js LTS image
-FROM node:20
-
-# Set working directory
+# Multi-stage build for Product Service
+FROM node:20-alpine AS builder
 WORKDIR /app
-
-# Copy package.json and package-lock.json
 COPY package*.json ./
+RUN npm ci --only=production
 
-# Install dependencies
-RUN npm install
-
-# Copy the rest of the application code
+FROM node:20-alpine AS runtime
+WORKDIR /app
+COPY --from=builder /app/node_modules ./node_modules
 COPY . .
-
-# Set environment variables (you'll provide them at runtime)
 ENV NODE_ENV=production
-
-# Expose the port your app runs on
 EXPOSE 4001
-
-# Start the application
+USER node
 CMD ["node", "index.js"]
